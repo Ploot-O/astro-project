@@ -17,7 +17,7 @@ CounterType = int
 
 # * Read config file
 config = configparser.ConfigParser()
-config_file_path = "astro-project/forPi/config.ini"
+config_file_path = "./forPi/config.ini"
 
 try:
     config.read(config_file_path)
@@ -33,7 +33,7 @@ logging.basicConfig(
     level=logging.INFO,
     format="%(asctime)s - %(levelname)s - %(message)s",
     handlers=[
-        logging.FileHandler("observatory.log"),
+        logging.FileHandler("./forPi/observatory.log"),
         logging.StreamHandler(),
     ],
 )
