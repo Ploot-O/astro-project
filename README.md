@@ -1,6 +1,6 @@
-# CerebriCaeli Observatory Control System
+# ASTRO Observatory Control System
 
-CerebriCaeli is a comprehensive control system for an astronomical observatory. It consists of two main components: a Raspberry Pi-based controller (CerebriCaeliV3.py) and a companion Python script (MittensV1.py) that runs on the control computer and sends azimuthal data to the Raspberry Pi.
+ASTRO is a comprehensive control system for the observatory on the roof of Boyer Hall at Arcadia University. It consists of two main components: a Raspberry Pi-based controller (CerebriCaeliV3.py) and a companion Python script (MittensV1.py) that runs on the control computer and sends azimuthal data to the Raspberry Pi.
 
 ## CerebriCaeliV3.py
 
