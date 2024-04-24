@@ -6,7 +6,7 @@ import logging
 import multiprocessing
 import configparser
 import traceback
-import signal
+import tkinter as tk
 from typing import Dict, Union
 
 # * Use Type Hints
@@ -37,17 +37,6 @@ logging.basicConfig(
         logging.StreamHandler(),
     ],
 )
-
-
-# * Graceful shutdown
-def shutdown_gracefully(signum, frame):
-    logging.info("Received signal to shutdown gracefully")
-    # Add your cleanup logic here
-    exit(0)
-
-
-signal.signal(signal.SIGINT, shutdown_gracefully)
-signal.signal(signal.SIGTERM, shutdown_gracefully)
 
 
 # * Class for the 4 channel relay that controls the rotation and shutter motors
@@ -434,13 +423,16 @@ class Socket:
                     float(config.get("Socket Settings", "die_counter")) * 60
                 )
 
-                self.data.value = float(data.decode("utf-8"))
-                self.observatory.check_for_sync(self.data.value, False)
+                if self.data.decode("utf-8") == "toggle":
+                    self.observatory.operate("close")
+                elif self.data.decode("utf-8") == "abort":
+                    self.observatory.return_home()
+                else:
+                    self.data.value = float(data.decode("utf-8"))
+                    self.observatory.check_for_sync(self.data.value, False)
 
         except socket.error as e:
             logging.error(f"socket error: {e}")
-            # Implement retry mechanism for socket communication
-            # ...
         except Exception as e:
             logging.error(f"exception error at socket: {e}\n{traceback.format_exc()}")
         finally:
