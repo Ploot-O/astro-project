@@ -12,7 +12,7 @@ from watchdog.events import FileSystemEventHandler
 
 # Read configuration settings
 config = configparser.ConfigParser()
-config_file_path = "./forPc/config.ini"
+config_file_path = "config.ini"
 
 try:
     config.read(config_file_path)
@@ -28,7 +28,7 @@ logging.basicConfig(
     level=logging.INFO,
     format="%(asctime)s - %(levelname)s - %(message)s",
     handlers=[
-        logging.FileHandler("./forPc/mittens.log"),
+        logging.FileHandler("mittens.log"),
         logging.StreamHandler(),
     ],
 )
